@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+            <tr *ngFor='#customer of customers'>
+                <td>{{customer.id}}</td>
+                <td><a href="" (click)="onSelectCustomer($event,customer.id)">{{customer.firstName}}</a></td>
+                <td>{{customer.lastName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

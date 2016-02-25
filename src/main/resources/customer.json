@@ -1,0 +1,22 @@
+{
+  "entityName":"Customer",
+  "version":1,
+  "fields":[
+    {
+      "id":1,
+      "type":"email",
+      "name":"email",
+      "value":"michaeldesigaud@gmail.com",
+      "label":"Email",
+      "required":true
+    },
+    {
+      "id":2,
+      "type":"number",
+      "name":"age",
+      "value":"28",
+      "label":"Age",
+      "required":true
+    }
+  ]
+}

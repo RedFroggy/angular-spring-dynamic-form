@@ -1,0 +1,4 @@
+src/main/webapp/node_modules/
+target/
+.idea/
+*.iml
