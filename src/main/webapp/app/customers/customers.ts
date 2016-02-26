@@ -8,9 +8,13 @@ import {Http} from 'angular2/http';
 })
 export class Customers {
     customers:Array<any>;
-    constructor(private http:Http) {
+    constructor(private http:Http,private router: Router) {
         http.get('http://localhost:8080/api/customers').map(res => res.json()).subscribe((customers:Array<any>) => {
             this.customers = customers;
         });
-     }
+    }
+    onSelectCustomer(event:Event,id:number):void {
+        event.preventDefault();
+        this.router.navigate(['Customer',{id:id}]);
+    }
 }

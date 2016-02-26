@@ -5,10 +5,7 @@ import fr.redfroggy.dynamicforms.repository.CustomerRepository;
 import fr.redfroggy.dynamicforms.utils.Form;
 import fr.redfroggy.dynamicforms.utils.FormUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,11 +25,16 @@ public class CustomerResource {
         return this.customerRepository.findAll();
     }
 
+    @RequestMapping(path = "/{id}",method = RequestMethod.GET)
+    public Customer get(@PathVariable Long id){
+        return this.customerRepository.findOne(id);
+    }
+
     @RequestMapping(path = "/form",method = RequestMethod.GET)
-    public Form getForm(@RequestParam(name = "extraFields",required = false) Boolean extraFields){
-        if(extraFields == null){
-            extraFields = false;
+    public Form getForm(@RequestParam(name = "onlyExtraFields",required = false) Boolean onlyExtraFields){
+        if(onlyExtraFields == null){
+            onlyExtraFields = false;
         }
-        return FormUtils.describe(Customer.class,extraFields);
+        return FormUtils.describe(Customer.class,onlyExtraFields);
     }
 }

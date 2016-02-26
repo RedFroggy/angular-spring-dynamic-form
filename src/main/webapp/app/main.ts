@@ -4,6 +4,7 @@ import {ROUTER_PROVIDERS, APP_BASE_HREF, LocationStrategy,HashLocationStrategy }
 import {AppComponent} from './app.component';
 import {HTTP_PROVIDERS, Http,RequestOptions, XHRBackend} from 'angular2/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/timer';
 
 bootstrap(AppComponent, [
     HTTP_PROVIDERS,

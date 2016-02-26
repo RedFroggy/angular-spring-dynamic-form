@@ -139,59 +139,59 @@ public class FormUtils {
      * Get fields
      * @param type dto type
      * @param fields fields to retrieve
-     * @param withExtraFields include extra fields or no
+     * @param onlyExtraFields include only extra fields or no
      * @return List of FormField
      */
-    public static List<FormField> getFields(Class<?> type,String fields, Boolean withExtraFields){
+    public static List<FormField> getFields(Class<?> type,String fields, Boolean onlyExtraFields){
 
         //List fieldList = fields != null ? Arrays.asList(fields.split(ApiUrlResolver.FIELDS_SEPARATOR_REGEX)) : null;
 
-        Boolean useExtraFields = withExtraFields;
+        Boolean useOnlyExtraFields = onlyExtraFields;
         if(type == null){
             return new ArrayList<>();
         }
-        if(useExtraFields == null){
-            useExtraFields = false;
+        if(useOnlyExtraFields == null){
+            useOnlyExtraFields = false;
         }
         Set<FormField> formFields = new HashSet<>();
 
-        for(Field field : getReflectionFields(type)){
-            log.info("Reflect field: {}",field);
-            //Ignore static field and make sure the user has the authority to read field
-            //  && (fieldList == null || fieldList.contains(field.getName()))
-            if(!Modifier.isStatic(field.getModifiers())){
-                final FormField formField = new FormField();
-                formField.setExtrafield(false);
-                formField.setEntityName(type.getSimpleName());
-                formField.setRequired(isReflectFieldMandatory(field));
-                formField.setName(field.getName());
-                formField.setType(getFieldType(field));
-                formField.setLabel(null);
-                if(DROPDOWN_TYPE.equals(formField.getType())){
-                    formField.setEnumValues(new ArrayList<String>());
-                    for(Object enumValue : field.getType().getEnumConstants()){
-                        formField.getEnumValues().add(((Enum)enumValue).name());
+        if(!useOnlyExtraFields) {
+            for (Field field : getReflectionFields(type)) {
+                log.info("Reflect field: {}", field);
+                //Ignore static field and make sure the user has the authority to read field
+                //  && (fieldList == null || fieldList.contains(field.getName()))
+                if (!Modifier.isStatic(field.getModifiers())) {
+                    final FormField formField = new FormField();
+                    formField.setExtrafield(false);
+                    formField.setEntityName(type.getSimpleName());
+                    formField.setRequired(isReflectFieldMandatory(field));
+                    formField.setName(field.getName());
+                    formField.setType(getFieldType(field));
+                    formField.setLabel(null);
+                    if (DROPDOWN_TYPE.equals(formField.getType())) {
+                        formField.setEnumValues(new ArrayList<String>());
+                        for (Object enumValue : field.getType().getEnumConstants()) {
+                            formField.getEnumValues().add(((Enum) enumValue).name());
+                        }
                     }
-                }
-                formField.setReadable(true);
-                formField.setWritable(true);
+                    formField.setReadable(true);
+                    formField.setWritable(true);
 
-                Boolean existingField = CollectionUtils.exists(formFields,new Predicate() {
-                    @Override
-                    public boolean evaluate(Object object) {
-                        return ((FormField)object).getName().equals(formField.getName());
+                    Boolean existingField = CollectionUtils.exists(formFields, new Predicate() {
+                        @Override
+                        public boolean evaluate(Object object) {
+                            return ((FormField) object).getName().equals(formField.getName());
+                        }
+                    });
+                    if (!existingField) {
+                        formFields.add(formField);
                     }
-                });
-                if(!existingField) {
-                    formFields.add(formField);
                 }
             }
         }
-        if(useExtraFields){
-            Form form = getFormByType(type);
-            if(form != null){
-                formFields.addAll(form.getFields());
-            }
+        Form form = getFormByType(type);
+        if(form != null){
+            formFields.addAll(form.getFields());
         }
         return new ArrayList<>(formFields);
     }
@@ -213,14 +213,14 @@ public class FormUtils {
      * Describe entity
      * @param type dto type
      * @param fields fields to retrieve
-     * @param withExtraFields include extra fields or no
+     * @param onlyExtraFields include only extra fields or no
      * @return ExtraFieldEntity
      */
-    public static Form describe(Class<?> type,String fields,Boolean withExtraFields){
+    public static Form describe(Class<?> type,String fields,Boolean onlyExtraFields){
         if(type != null) {
             Form form = new Form();
             form.setEntityName(type.getSimpleName());
-            form.setFields(getFields(type,fields,withExtraFields));
+            form.setFields(getFields(type,fields,onlyExtraFields));
             return form;
         }
         return null;
@@ -229,11 +229,11 @@ public class FormUtils {
     /**
      * Describe entity
      * @param type dto type
-     * @param withExtraFields include extra fields or no
+     * @param onlyExtraFields include only extra fields or no
      * @return ExtraFieldEntity
      */
-    public static Form describe(Class<?> type,Boolean withExtraFields){
-        return describe(type,null,withExtraFields);
+    public static Form describe(Class<?> type,Boolean onlyExtraFields){
+        return describe(type,null,onlyExtraFields);
     }
     /**
      * Get list generic type
