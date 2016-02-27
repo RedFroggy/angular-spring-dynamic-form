@@ -1,56 +1,60 @@
 var common_1 = require('angular2/common');
 var validator_service_1 = require('../validators/validator.service');
 ///<reference path="../../../../../../typings/lodash/lodash.d.ts" />
-var TYPE_EMAIL = 'email';
-var TYPE_NUMBER = 'number';
-var TYPE_TEXT = 'text';
-var TYPE_TEXTAREA = 'textarea';
-var TYPE_FILE = 'file';
-var TYPE_PASSWORD = 'password';
-var ExtraFormField = (function () {
-    function ExtraFormField(_field) {
+const TYPE_EMAIL = 'email';
+const TYPE_NUMBER = 'number';
+const TYPE_TEXT = 'text';
+const TYPE_TEXTAREA = 'textarea';
+const TYPE_FILE = 'file';
+const TYPE_PASSWORD = 'password';
+const TYPE_SELECT = 'select';
+class ExtraFormField {
+    constructor(_field) {
         _.assignIn(this, _field);
         this.initValidators();
     }
-    ExtraFormField.prototype.hasValue = function () {
+    hasValue() {
         return !!this.value;
-    };
-    ExtraFormField.prototype.isType = function (type) {
+    }
+    isType(type) {
         return type === this.type;
-    };
-    ExtraFormField.prototype.isTypeEmail = function () {
+    }
+    isTypeEmail() {
         return this.isType(TYPE_EMAIL);
-    };
-    ExtraFormField.prototype.isTypeNumber = function () {
+    }
+    isTypeNumber() {
         return this.isType(TYPE_NUMBER);
-    };
-    ExtraFormField.prototype.isTypeText = function () {
+    }
+    isTypeText() {
         return this.isType(TYPE_TEXT);
-    };
-    ExtraFormField.prototype.isTypeFile = function () {
+    }
+    isTypeFile() {
         return this.isType(TYPE_FILE);
-    };
-    ExtraFormField.prototype.isInput = function () {
+    }
+    isInput() {
         return this.isTypeText()
             || this.isTypeEmail()
             || this.isTypeNumber()
             || this.isTypePassword();
-    };
-    ExtraFormField.prototype.isTypeTextArea = function () {
+    }
+    isTypeTextArea() {
         return this.isType(TYPE_TEXTAREA);
-    };
-    ExtraFormField.prototype.isTypePassword = function () {
+    }
+    isTypePassword() {
         return this.isType(TYPE_PASSWORD);
-    };
-    ExtraFormField.prototype.getControl = function () {
+    }
+    isTypeSelect() {
+        return this.isType(TYPE_SELECT);
+    }
+    getControl() {
         if (!this.control) {
             this.control = new common_1.Control(this.name, this.validators);
         }
         return this.control;
-    };
-    ExtraFormField.prototype.initValidators = function () {
+    }
+    initValidators() {
         console.log('Adding validators to control ', this.name);
-        var validators = [];
+        let validators = [];
         if (this.required) {
             validators.push(common_1.Validators.required);
         }
@@ -73,22 +77,20 @@ var ExtraFormField = (function () {
         }
         console.log(validators.length + ' validators added to control', this.name);
         this.validators = common_1.Validators.compose(validators);
-    };
-    return ExtraFormField;
-})();
+    }
+}
 exports.ExtraFormField = ExtraFormField;
-var ExtraForm = (function () {
-    function ExtraForm(_form) {
+class ExtraForm {
+    constructor(_form) {
         if (_form && _form.fields) {
             this.entityName = _form.entityName;
             this.version = _form.version;
-            var fields = [];
-            _form.fields.forEach(function (field) {
+            let fields = [];
+            _form.fields.forEach((field) => {
                 fields.push(new ExtraFormField((field)));
             });
             this.fields = fields;
         }
     }
-    return ExtraForm;
-})();
+}
 exports.ExtraForm = ExtraForm;

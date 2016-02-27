@@ -43,7 +43,7 @@
       "type":"file",
       "name":"attachment",
       "label":"Attachment",
-      "fileAccept":"image/*"
+      "fileAccept":"application/pdf"
     },
     {
       "id":6,
@@ -51,7 +51,28 @@
       "name":"password",
       "label":"Password",
       "placeholder":"Ex: myp4ssw0rd",
-      "pattern":"/^[a-z0-9_-]{6,18}$/"
+      "pattern":"^[a-z0-9_-]{6,18}$"
+    },
+    {
+      "id":7,
+      "type":"select",
+      "name":"roles",
+      "label":"Roles",
+      "required":true,
+      "options":[
+        {
+          "id":1,
+          "value":"Admin"
+        },
+        {
+          "id":2,
+          "value":"Manager"
+        },
+        {
+          "id":1,
+          "value":"User"
+        }
+      ]
     }
   ]
 }

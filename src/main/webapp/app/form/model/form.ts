@@ -9,6 +9,7 @@ const TYPE_TEXT:string = 'text';
 const TYPE_TEXTAREA:string = 'textarea';
 const TYPE_FILE:string = 'file';
 const TYPE_PASSWORD:string = 'password';
+const TYPE_SELECT:string = 'select';
 
 export class ExtraFormField {
     id:number;
@@ -29,6 +30,7 @@ export class ExtraFormField {
     maxLength:number;
     showAsColumn:boolean;
     fileAccept:string;
+    options:Array<{id:number,value:string}>;
     private validators:Function;
     private control:Control;
     constructor(_field?:any) {
@@ -64,6 +66,9 @@ export class ExtraFormField {
     }
     isTypePassword():boolean  {
         return this.isType(TYPE_PASSWORD);
+    }
+    isTypeSelect():boolean  {
+        return this.isType(TYPE_SELECT);
     }
     getControl():Control {
         if(!this.control) {

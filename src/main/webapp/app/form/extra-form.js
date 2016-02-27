@@ -13,24 +13,27 @@ var input_extra_field_1 = require('./fields/input-extra-field');
 var form_1 = require('./model/form');
 var textarea_extra_field_1 = require('./fields/textarea-extra-field');
 var file_input_extra_field_1 = require('./fields/file-input-extra-field');
-var DynamicForm = (function () {
-    function DynamicForm(http, dcl, elementRef) {
+var select_extra_field_1 = require('./fields/select-extra-field');
+let DynamicForm = class {
+    constructor(http, dcl, elementRef) {
         this.http = http;
         this.dcl = dcl;
         this.elementRef = elementRef;
         this.onlyExtraFields = true;
         this.form = new form_1.ExtraForm();
     }
-    DynamicForm.prototype.ngOnInit = function () {
-        var _this = this;
-        this.http.get('http://localhost:8080/api/customers/form?onlyExtraFields=' + this.onlyExtraFields).map(function (res) { return res.json(); })
-            .subscribe(function (form) {
-            _this.form = new form_1.ExtraForm(form);
-            if (!_this.entity.extraFields) {
-                _this.entity.extraFields = {};
+    ngOnInit() {
+        let formPromise = this.http.get('http://localhost:8080/api/customers/form?onlyExtraFields=' + this.onlyExtraFields)
+            .map(res => res.json())
+            .toPromise();
+        Promise.all([this.entityPromise, formPromise]).then((values) => {
+            let entity = values[0];
+            this.form = new form_1.ExtraForm(values[1]);
+            if (!entity.extraFields) {
+                entity.extraFields = {};
             }
-            _this.form.fields.forEach(function (field) {
-                var type;
+            this.form.fields.forEach((field) => {
+                let type;
                 if (field.isInput()) {
                     type = input_extra_field_1.InputExtraField;
                 }
@@ -40,25 +43,27 @@ var DynamicForm = (function () {
                 if (field.isTypeFile()) {
                     type = file_input_extra_field_1.FileInputExtraField;
                 }
-                _this.dcl.loadIntoLocation(type, _this.elementRef, 'extraField').then(function (componentRef) {
-                    var instance = componentRef.instance;
-                    instance.entity = _this.entity;
+                if (field.isTypeSelect()) {
+                    type = select_extra_field_1.SelectExtraField;
+                }
+                this.dcl.loadIntoLocation(type, this.elementRef, 'extraField').then((componentRef) => {
+                    let instance = componentRef.instance;
+                    instance.entity = entity;
                     instance.field = field;
                 });
             });
         });
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DynamicForm.prototype, "entity", void 0);
-    DynamicForm = __decorate([
-        core_1.Component({
-            selector: 'extra-form',
-            template: '<div #extraField></div>'
-        }), 
-        __metadata('design:paramtypes', [http_1.Http, core_1.DynamicComponentLoader, core_1.ElementRef])
-    ], DynamicForm);
-    return DynamicForm;
-})();
+    }
+};
+__decorate([
+    core_1.Input('entity'), 
+    __metadata('design:type', Promise)
+], DynamicForm.prototype, "entityPromise", void 0);
+DynamicForm = __decorate([
+    core_1.Component({
+        selector: 'extra-form',
+        template: '<div #extraField></div>'
+    }), 
+    __metadata('design:paramtypes', [http_1.Http, core_1.DynamicComponentLoader, core_1.ElementRef])
+], DynamicForm);
 exports.DynamicForm = DynamicForm;

@@ -13,13 +13,13 @@ import {ControlMessages} from '../form/error/control-messages';
 export class Customer {
     customerForm:ControlGroup;
     customer:any;
+    customerPromise:Promise;
     isEdition:boolean;
     nbErrors:number;
     constructor(private http:Http,private router:Router,private form: FormBuilder,private routeParams:RouteParams,routeData: RouteData) {
         this.customer = {};
         this.nbErrors = 0;
         this.isEdition = routeData.get('isEdition');
-        console.log(this.isEdition);
 
         this.customerForm = form.group({
             firstName: ['', Validators.required],
@@ -37,9 +37,13 @@ export class Customer {
         }
     }
     getCustomer():void {
-        this.http.get('http://localhost:8080/api/customers/'+this.routeParams.get('id'))
-            .map(res => res.json())
-            .subscribe((customer:any) => this.customer = customer);
+        this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+this.routeParams.get('id'))
+            .map(res => res.json()).toPromise();
+
+        this.customerPromise.then((customer:any) => {
+            this.customer = customer;
+            return customer;
+        });
     }
     cancel():void {
         this.router.navigate(['Customers']);

@@ -8,17 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var ValuesPipe = (function () {
-    function ValuesPipe() {
+let ValuesPipe = class {
+    transform(value, args = null) {
+        return value ? Object.keys(value).map((key) => { return { value: value[key], key: key }; }) : value;
     }
-    ValuesPipe.prototype.transform = function (value, args) {
-        if (args === void 0) { args = null; }
-        return value ? Object.keys(value).map(function (key) { return { value: value[key], key: key }; }) : value;
-    };
-    ValuesPipe = __decorate([
-        core_1.Pipe({ name: 'values', pure: false }), 
-        __metadata('design:paramtypes', [])
-    ], ValuesPipe);
-    return ValuesPipe;
-})();
+};
+ValuesPipe = __decorate([
+    core_1.Pipe({ name: 'values', pure: false }), 
+    __metadata('design:paramtypes', [])
+], ValuesPipe);
 exports.ValuesPipe = ValuesPipe;

@@ -12,22 +12,19 @@ var router_1 = require('angular2/router');
 var header_1 = require('./header/header');
 var customers_1 = require('./customers/customers');
 var customer_1 = require('./customer/customer');
-var AppComponent = (function () {
-    function AppComponent() {
-    }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'dynamic-app',
-            templateUrl: './app/app.html',
-            directives: [router_1.ROUTER_DIRECTIVES, header_1.Header]
-        }),
-        router_1.RouteConfig([
-            new router_1.Route({ path: '/customers', component: customers_1.Customers, name: 'Customers', useAsDefault: true }),
-            new router_1.Route({ path: '/customer/create', component: customer_1.Customer, name: 'CustomerCreate', data: { isEdition: false } }),
-            new router_1.Route({ path: '/customer/:id', component: customer_1.Customer, name: 'CustomerEdit', data: { isEdition: true } })
-        ]), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
-})();
+let AppComponent = class {
+};
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'dynamic-app',
+        templateUrl: './app/app.html',
+        directives: [router_1.ROUTER_DIRECTIVES, header_1.Header]
+    }),
+    router_1.RouteConfig([
+        new router_1.Route({ path: '/customers', component: customers_1.Customers, name: 'Customers', useAsDefault: true }),
+        new router_1.Route({ path: '/customer/create', component: customer_1.Customer, name: 'CustomerCreate', data: { isEdition: false } }),
+        new router_1.Route({ path: '/customer/:id', component: customer_1.Customer, name: 'CustomerEdit', data: { isEdition: true } })
+    ]), 
+    __metadata('design:paramtypes', [])
+], AppComponent);
 exports.AppComponent = AppComponent;

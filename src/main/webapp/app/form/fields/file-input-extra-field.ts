@@ -32,7 +32,7 @@ export class FileInputExtraField extends ExtraField {
             fileReader.readAsDataURL(file);
 
             fileReader.onloadend = () => {
-                this.entity[this.field.name] = fileReader.result;
+                this.entity.extraFields[this.field.name] = fileReader.result;
             };
         }
     }

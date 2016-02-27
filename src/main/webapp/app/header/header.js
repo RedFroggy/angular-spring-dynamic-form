@@ -8,16 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var Header = (function () {
-    function Header() {
-    }
-    Header = __decorate([
-        core_1.Component({
-            selector: 'header',
-            templateUrl: './app/header/header.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], Header);
-    return Header;
-})();
+let Header = class {
+};
+Header = __decorate([
+    core_1.Component({
+        selector: 'header',
+        templateUrl: './app/header/header.html'
+    }), 
+    __metadata('design:paramtypes', [])
+], Header);
 exports.Header = Header;

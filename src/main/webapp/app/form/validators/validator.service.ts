@@ -44,7 +44,7 @@ export class ValidatorService {
 
     static regexValidator(pattern: string): Function {
         return (control: Control): {[key: string]: any} => {
-            return control.value && new RegExp(pattern).test(control.value) ? null : {pattern: {regex:pattern}};
+            return control.value && control.value.match(pattern) ? null : {pattern: {regex:pattern}};
         };
     }
 }

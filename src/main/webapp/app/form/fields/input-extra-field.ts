@@ -13,7 +13,7 @@ import {ControlMessages} from '../error/control-messages';
             <input [attr.title]="field.label" [attr.minlength]="field.minLength" [attr.min]="field.min" [attr.max]="field.max"
             [attr.maxlength]="field.maxLength" [attr.placeholder]="field.placeholder"
             [attr.type]="field.type" [ngFormControl]="fieldControl"
-            [attr.id]="field.name" [(ngModel)]="entity.extraFields[field.name]" class="form-control" [pattern]="field.pattern">
+            [attr.id]="field.name" [(ngModel)]="entity.extraFields[field.name]" class="form-control">
             <error-messages [control]="field.name"></error-messages>
         </div>
     `
