@@ -11,9 +11,9 @@ import {ControlMessages} from '../error/control-messages';
         <div class="form-group">
             <label [attr.for]="field.name">{{field.label}}</label>
             <textarea [attr.title]="field.label" [attr.minlength]="field.minLength"
-            [attr.maxlength]="field.maxLength" [attr.placeholder]="field.label"
+            [attr.maxlength]="field.maxLength" [attr.placeholder]="field.placeholder"
             [attr.type]="field.type" [ngFormControl]="fieldControl"
-            [attr.id]="field.name" [(ngModel)]="entity[field.name]" class="form-control"></textarea>
+            [attr.id]="field.name" [(ngModel)]="entity.extraFields[field.name]" class="form-control"></textarea>
             <error-messages [control]="field.name"></error-messages>
         </div>
     `

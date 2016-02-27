@@ -4,6 +4,9 @@
             <fieldset>
                 <legend>General Information</legend>
                 <div class="form-group">
+                    <span class="label label-danger">{{nbErrors}} errors</span>
+                </div>
+                <div class="form-group">
                     <label for="firstName">First name</label>
                     <input type="text" id="firstName" required [(ngModel)]="customer.firstName" ngControl="firstName" class="form-control">
                     <error-messages control="firstName"></error-messages>

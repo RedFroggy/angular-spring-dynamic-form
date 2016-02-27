@@ -20,8 +20,16 @@
                         <td><a href="" (click)="onSelectCustomer($event,customer.id)">{{customer.firstName}}</a></td>
                         <td>{{customer.lastName}}</td>
                         <td>
-                            <div *ngFor='#extraField of customer.extraFields | values'>
-                                <strong>{{extraField.key}}</strong>: {{extraField.value}}
+                            <div *ngFor='#extraField of customer.extraFields | values' [hidden]="!showExtraField(extraField)">
+                                <span *ngIf="!isTypeImage(extraField) && !isTypeApplication(extraField)">
+                                   <strong>{{extraField.key}}</strong>: {{extraField.value}}
+                                </span>
+                                 <span *ngIf="isTypeImage(extraField)">
+                                     <img src="{{extraField.value}}" width="100" height="100" title="{{extraField.key}}" alt="{{extraField.key}}" />
+                                 </span>
+                                 <span *ngIf="isTypeApplication(extraField)">
+                                     <strong>{{extraField.key}}</strong>: <a href="{{extraField.value}}" target="_blank" title="{{extraField.key}}"><i class="fa fa-file"></i></a>
+                                 </span>
                             </div>
                         </td>
                     </tr>

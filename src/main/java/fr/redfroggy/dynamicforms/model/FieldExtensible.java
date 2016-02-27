@@ -2,6 +2,8 @@ package fr.redfroggy.dynamicforms.model;
 
 import fr.redfroggy.dynamicforms.converter.HashMapToStringConverter;
 
+import javax.persistence.Column;
+import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public abstract class FieldExtensible implements Serializable {
 
+    @Lob
     private String extraFields;
 
     /**

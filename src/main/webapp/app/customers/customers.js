@@ -27,6 +27,15 @@ var Customers = (function () {
     Customers.prototype.addCustomer = function () {
         this.router.navigate(['CustomerCreate']);
     };
+    Customers.prototype.showExtraField = function () {
+        return true;
+    };
+    Customers.prototype.isTypeImage = function (extraField) {
+        return extraField && extraField.value.indexOf('data:image') !== -1;
+    };
+    Customers.prototype.isTypeApplication = function (extraField) {
+        return extraField && extraField.value.indexOf('data:application') !== -1;
+    };
     Customers = __decorate([
         core_1.Component({
             selector: 'customers',

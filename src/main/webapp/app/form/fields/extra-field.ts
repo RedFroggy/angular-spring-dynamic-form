@@ -18,7 +18,9 @@ export abstract class ExtraField {
                 value = this.field.value;
                 this.entity[this.field.name] = value;
             }
-            this.fieldControl.updateValue(value);
+            if(!this.field.isTypeFile()) {
+                this.fieldControl.updateValue(value);
+            }
         }, 0);
     }
 }

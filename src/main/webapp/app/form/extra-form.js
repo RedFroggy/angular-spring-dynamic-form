@@ -12,6 +12,7 @@ var http_1 = require('angular2/http');
 var input_extra_field_1 = require('./fields/input-extra-field');
 var form_1 = require('./model/form');
 var textarea_extra_field_1 = require('./fields/textarea-extra-field');
+var file_input_extra_field_1 = require('./fields/file-input-extra-field');
 var DynamicForm = (function () {
     function DynamicForm(http, dcl, elementRef) {
         this.http = http;
@@ -36,9 +37,12 @@ var DynamicForm = (function () {
                 if (field.isTypeTextArea()) {
                     type = textarea_extra_field_1.TextAreaExtraField;
                 }
+                if (field.isTypeFile()) {
+                    type = file_input_extra_field_1.FileInputExtraField;
+                }
                 _this.dcl.loadIntoLocation(type, _this.elementRef, 'extraField').then(function (componentRef) {
                     var instance = componentRef.instance;
-                    instance.entity = _this.entity.extraFields;
+                    instance.entity = _this.entity;
                     instance.field = field;
                 });
             });

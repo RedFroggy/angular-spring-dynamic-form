@@ -18,6 +18,10 @@ var ValidatorService = (function () {
             var error = control.getError('minlength');
             errors.push('At least ' + error.requiredLength + ' characters minimum, actual: ' + error.actualLength);
         }
+        if (control.hasError('pattern')) {
+            var error = control.getError('pattern');
+            errors.push('Invalid pattern, must match: ' + error.regex);
+        }
         return errors;
     };
     ValidatorService.emailValidator = function (control) {
@@ -31,6 +35,11 @@ var ValidatorService = (function () {
             return null;
         }
         return { 'invalidNumber': true };
+    };
+    ValidatorService.regexValidator = function (pattern) {
+        return function (control) {
+            return control.value && new RegExp(pattern).test(control.value) ? null : { pattern: { regex: pattern } };
+        };
     };
     return ValidatorService;
 })();

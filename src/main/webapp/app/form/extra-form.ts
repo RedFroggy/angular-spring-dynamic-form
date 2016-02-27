@@ -4,6 +4,8 @@ import {Http} from 'angular2/http';
 import {InputExtraField} from './fields/input-extra-field';
 import {ExtraForm,ExtraFormField} from './model/form';
 import {TextAreaExtraField} from './fields/textarea-extra-field';
+import {FileInputExtraField} from './fields/file-input-extra-field';
+import {ExtraField} from './fields/extra-field';
 
 @Component({
     selector: 'extra-form',
@@ -31,9 +33,12 @@ export class DynamicForm {
                     if(field.isTypeTextArea()) {
                         type = TextAreaExtraField;
                     }
+                    if(field.isTypeFile()) {
+                        type = FileInputExtraField;
+                    }
                     this.dcl.loadIntoLocation(type,this.elementRef,'extraField').then((componentRef:ComponentRef) => {
-                        let instance:InputExtraField = componentRef.instance;
-                        instance.entity = this.entity.extraFields;
+                        let instance:ExtraField = componentRef.instance;
+                        instance.entity = this.entity;
                         instance.field = field;
                     });
                 });

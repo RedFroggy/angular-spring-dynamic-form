@@ -5,6 +5,8 @@ var TYPE_EMAIL = 'email';
 var TYPE_NUMBER = 'number';
 var TYPE_TEXT = 'text';
 var TYPE_TEXTAREA = 'textarea';
+var TYPE_FILE = 'file';
+var TYPE_PASSWORD = 'password';
 var ExtraFormField = (function () {
     function ExtraFormField(_field) {
         _.assignIn(this, _field);
@@ -25,13 +27,20 @@ var ExtraFormField = (function () {
     ExtraFormField.prototype.isTypeText = function () {
         return this.isType(TYPE_TEXT);
     };
+    ExtraFormField.prototype.isTypeFile = function () {
+        return this.isType(TYPE_FILE);
+    };
     ExtraFormField.prototype.isInput = function () {
         return this.isTypeText()
             || this.isTypeEmail()
-            || this.isTypeNumber();
+            || this.isTypeNumber()
+            || this.isTypePassword();
     };
     ExtraFormField.prototype.isTypeTextArea = function () {
         return this.isType(TYPE_TEXTAREA);
+    };
+    ExtraFormField.prototype.isTypePassword = function () {
+        return this.isType(TYPE_PASSWORD);
     };
     ExtraFormField.prototype.getControl = function () {
         if (!this.control) {
@@ -58,6 +67,9 @@ var ExtraFormField = (function () {
         }
         if (this.isTypeNumber()) {
             validators.push(validator_service_1.ValidatorService.numberValidator);
+        }
+        if (this.isInput() && this.pattern) {
+            validators.push(validator_service_1.ValidatorService.regexValidator(this.pattern));
         }
         console.log(validators.length + ' validators added to control', this.name);
         this.validators = common_1.Validators.compose(validators);

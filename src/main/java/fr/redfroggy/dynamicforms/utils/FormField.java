@@ -62,6 +62,10 @@ public class FormField implements Serializable {
 
     private Boolean showAsColumn;
 
+    private String fileAccept;
+
+    private String placeholder;
+
     public Integer getId() {
         return id;
     }
@@ -193,6 +197,25 @@ public class FormField implements Serializable {
 
     public void setShowAsColumn(Boolean showAsColumn) {
         this.showAsColumn = showAsColumn;
+    }
+
+    public String getFileAccept() {
+        return fileAccept;
+    }
+
+    public void setFileAccept(String fileAccept) {
+        this.fileAccept = fileAccept;
+    }
+
+    public String getPlaceholder() {
+        if(this.placeholder != null){
+            return this.placeholder;
+        }
+        return this.label;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
     }
 
     /**

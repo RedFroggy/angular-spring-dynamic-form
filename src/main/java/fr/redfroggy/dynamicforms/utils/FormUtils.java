@@ -138,13 +138,10 @@ public class FormUtils {
     /**
      * Get fields
      * @param type dto type
-     * @param fields fields to retrieve
      * @param onlyExtraFields include only extra fields or no
      * @return List of FormField
      */
-    public static List<FormField> getFields(Class<?> type,String fields, Boolean onlyExtraFields){
-
-        //List fieldList = fields != null ? Arrays.asList(fields.split(ApiUrlResolver.FIELDS_SEPARATOR_REGEX)) : null;
+    public static List<FormField> getFields(Class<?> type,Boolean onlyExtraFields){
 
         Boolean useOnlyExtraFields = onlyExtraFields;
         if(type == null){
@@ -212,29 +209,19 @@ public class FormUtils {
     /**
      * Describe entity
      * @param type dto type
-     * @param fields fields to retrieve
      * @param onlyExtraFields include only extra fields or no
      * @return ExtraFieldEntity
      */
-    public static Form describe(Class<?> type,String fields,Boolean onlyExtraFields){
+    public static Form describe(Class<?> type,Boolean onlyExtraFields){
         if(type != null) {
             Form form = new Form();
             form.setEntityName(type.getSimpleName());
-            form.setFields(getFields(type,fields,onlyExtraFields));
+            form.setFields(getFields(type,onlyExtraFields));
             return form;
         }
         return null;
     }
 
-    /**
-     * Describe entity
-     * @param type dto type
-     * @param onlyExtraFields include only extra fields or no
-     * @return ExtraFieldEntity
-     */
-    public static Form describe(Class<?> type,Boolean onlyExtraFields){
-        return describe(type,null,onlyExtraFields);
-    }
     /**
      * Get list generic type
      * @param field current field

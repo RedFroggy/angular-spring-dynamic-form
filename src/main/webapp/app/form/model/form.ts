@@ -7,6 +7,8 @@ const TYPE_EMAIL:string = 'email';
 const TYPE_NUMBER:string = 'number';
 const TYPE_TEXT:string = 'text';
 const TYPE_TEXTAREA:string = 'textarea';
+const TYPE_FILE:string = 'file';
+const TYPE_PASSWORD:string = 'password';
 
 export class ExtraFormField {
     id:number;
@@ -25,6 +27,8 @@ export class ExtraFormField {
     max:number;
     minLength:number;
     maxLength:number;
+    showAsColumn:boolean;
+    fileAccept:string;
     private validators:Function;
     private control:Control;
     constructor(_field?:any) {
@@ -46,13 +50,20 @@ export class ExtraFormField {
     isTypeText():boolean {
         return this.isType(TYPE_TEXT);
     }
+    isTypeFile():boolean {
+        return this.isType(TYPE_FILE);
+    }
     isInput():boolean {
         return this.isTypeText()
             || this.isTypeEmail()
-            || this.isTypeNumber();
+            || this.isTypeNumber()
+            || this.isTypePassword();
     }
     isTypeTextArea():boolean {
         return this.isType(TYPE_TEXTAREA);
+    }
+    isTypePassword():boolean  {
+        return this.isType(TYPE_PASSWORD);
     }
     getControl():Control {
         if(!this.control) {
@@ -79,6 +90,9 @@ export class ExtraFormField {
         }
         if(this.isTypeNumber()) {
             validators.push(ValidatorService.numberValidator);
+        }
+        if(this.isInput() && this.pattern) {
+            validators.push(ValidatorService.regexValidator(this.pattern));
         }
         console.log(validators.length+' validators added to control',this.name);
         this.validators = Validators.compose(validators);

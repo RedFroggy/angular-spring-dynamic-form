@@ -15,7 +15,9 @@ var ExtraField = (function () {
                 value = _this.field.value;
                 _this.entity[_this.field.name] = value;
             }
-            _this.fieldControl.updateValue(value);
+            if (!_this.field.isTypeFile()) {
+                _this.fieldControl.updateValue(value);
+            }
         }, 0);
     };
     return ExtraField;

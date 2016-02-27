@@ -21,6 +21,10 @@ export class ValidatorService {
             let error:{requiredLength:number,actualLength:number} = control.getError('minlength');
             errors.push('At least '+error.requiredLength+' characters minimum, actual: '+error.actualLength);
         }
+        if(control.hasError('pattern')) {
+            let error:{regex:string} = control.getError('pattern');
+            errors.push('Invalid pattern, must match: '+error.regex);
+        }
         return errors;
     }
 
@@ -36,5 +40,11 @@ export class ValidatorService {
             return null;
         }
         return { 'invalidNumber': true };
+    }
+
+    static regexValidator(pattern: string): Function {
+        return (control: Control): {[key: string]: any} => {
+            return control.value && new RegExp(pattern).test(control.value) ? null : {pattern: {regex:pattern}};
+        };
     }
 }

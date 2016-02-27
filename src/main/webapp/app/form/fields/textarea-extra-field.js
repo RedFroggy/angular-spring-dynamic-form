@@ -37,7 +37,7 @@ var TextAreaExtraField = (function (_super) {
         core_1.Component({
             selector: 'textarea-extra-field',
             directives: [control_messages_1.ControlMessages],
-            template: "\n        <div class=\"form-group\">\n            <label [attr.for]=\"field.name\">{{field.label}}</label>\n            <textarea [attr.title]=\"field.label\" [attr.minlength]=\"field.minLength\"\n            [attr.maxlength]=\"field.maxLength\" [attr.placeholder]=\"field.label\"\n            [attr.type]=\"field.type\" [ngFormControl]=\"fieldControl\"\n            [attr.id]=\"field.name\" [(ngModel)]=\"entity[field.name]\" class=\"form-control\"></textarea>\n            <error-messages [control]=\"field.name\"></error-messages>\n        </div>\n    "
+            template: "\n        <div class=\"form-group\">\n            <label [attr.for]=\"field.name\">{{field.label}}</label>\n            <textarea [attr.title]=\"field.label\" [attr.minlength]=\"field.minLength\"\n            [attr.maxlength]=\"field.maxLength\" [attr.placeholder]=\"field.placeholder\"\n            [attr.type]=\"field.type\" [ngFormControl]=\"fieldControl\"\n            [attr.id]=\"field.name\" [(ngModel)]=\"entity.extraFields[field.name]\" class=\"form-control\"></textarea>\n            <error-messages [control]=\"field.name\"></error-messages>\n        </div>\n    "
         }),
         __param(0, core_1.Inject(common_1.NgFormModel)), 
         __metadata('design:paramtypes', [common_1.NgFormModel])

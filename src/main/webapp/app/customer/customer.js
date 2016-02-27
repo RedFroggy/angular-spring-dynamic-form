@@ -15,16 +15,23 @@ var extra_form_1 = require('../form/extra-form');
 var control_messages_1 = require('../form/error/control-messages');
 var Customer = (function () {
     function Customer(http, router, form, routeParams, routeData) {
+        var _this = this;
         this.http = http;
         this.router = router;
         this.form = form;
         this.routeParams = routeParams;
         this.customer = {};
+        this.nbErrors = 0;
         this.isEdition = routeData.get('isEdition');
         console.log(this.isEdition);
         this.customerForm = form.group({
             firstName: ['', common_1.Validators.required],
             lastName: ['', common_1.Validators.required]
+        });
+        this.customerForm.valueChanges.subscribe(function () {
+            if (_this.customerForm.errors) {
+                _this.nbErrors = Object.keys(_this.customerForm.errors).length;
+            }
         });
         if (this.isEdition) {
             this.getCustomer();
@@ -47,7 +54,7 @@ var Customer = (function () {
         reqOptions.body = JSON.stringify(this.customer);
         reqOptions.headers = headers;
         this.isEdition ? reqOptions.method = 'PUT' : reqOptions.method = 'POST';
-        this.http.request('http://localhost:8080/api/customers/', reqOptions)
+        this.http.request('http://localhost:8080/api/customers', reqOptions)
             .map(function (res) { return res.json(); })
             .subscribe(function () { return _this.router.navigate(['Customers']); });
     };

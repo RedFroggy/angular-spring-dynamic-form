@@ -6,7 +6,7 @@
       "id":1,
       "type":"email",
       "name":"email",
-      "value":"michaeldesigaud@gmail.com",
+      "value":"defaultemail@redfroggy.fr",
       "label":"Email",
       "required":true,
       "showAsColumn":true
@@ -37,6 +37,21 @@
       "name":"description",
       "label":"Description",
       "required":true
+    },
+    {
+      "id":5,
+      "type":"file",
+      "name":"attachment",
+      "label":"Attachment",
+      "fileAccept":"image/*"
+    },
+    {
+      "id":6,
+      "type":"password",
+      "name":"password",
+      "label":"Password",
+      "placeholder":"Ex: myp4ssw0rd",
+      "pattern":"/^[a-z0-9_-]{6,18}$/"
     }
   ]
 }
