@@ -73,6 +73,14 @@
           "value":"User"
         }
       ]
+    },
+    {
+      "id":8,
+      "type":"text",
+      "name":"readable",
+      "label":"Readable field",
+      "value":"Readable value",
+      "writable":false
     }
   ]
 }

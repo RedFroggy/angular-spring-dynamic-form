@@ -44,9 +44,9 @@ public class FormField implements Serializable {
 
     private Boolean extrafield = true;
 
-    private Boolean readable;
+    private Boolean readable = true;
 
-    private Boolean writable;
+    private Boolean writable = true;
 
     private String pattern;
 
