@@ -12,39 +12,51 @@ var router_1 = require('angular2/router');
 var http_1 = require('angular2/http');
 var common_1 = require('angular2/common');
 var extra_form_1 = require('../form/extra-form');
-var common_2 = require("angular2/common");
 var Customer = (function () {
-    function Customer(http, router, form, routeParams) {
+    function Customer(http, router, form, routeParams, routeData) {
         this.http = http;
         this.router = router;
         this.form = form;
         this.routeParams = routeParams;
         this.customer = {};
+        this.isEdition = routeData.get('isEdition');
+        console.log(this.isEdition);
         this.customerForm = form.group({
             firstName: ['', common_1.Validators.required],
             lastName: ['', common_1.Validators.required]
         });
-        this.getCustomer();
+        if (this.isEdition) {
+            this.getCustomer();
+        }
     }
     Customer.prototype.getCustomer = function () {
         var _this = this;
-        this.http.get('http://localhost:8080/api/customers/' + this.routeParams.get('id')).map(function (res) { return res.json(); }).subscribe(function (customer) {
-            _this.customer = customer;
-        });
+        this.http.get('http://localhost:8080/api/customers/' + this.routeParams.get('id'))
+            .map(function (res) { return res.json(); })
+            .subscribe(function (customer) { return _this.customer = customer; });
     };
     Customer.prototype.cancel = function () {
         this.router.navigate(['Customers']);
     };
     Customer.prototype.saveCustomer = function () {
-        console.log(this.customer);
+        var _this = this;
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        var reqOptions = {};
+        reqOptions.body = JSON.stringify(this.customer);
+        reqOptions.headers = headers;
+        this.isEdition ? reqOptions.method = 'PUT' : reqOptions.method = 'POST';
+        this.http.request('http://localhost:8080/api/customers/', reqOptions)
+            .map(function (res) { return res.json(); })
+            .subscribe(function () { return _this.router.navigate(['Customers']); });
     };
     Customer = __decorate([
         core_1.Component({
             selector: 'customer',
             templateUrl: './app/customer/customer.html',
-            directives: [extra_form_1.ExtraForm, common_2.FORM_DIRECTIVES]
+            directives: [extra_form_1.DynamicForm]
         }), 
-        __metadata('design:paramtypes', [http_1.Http, router_1.Router, common_1.FormBuilder, router_1.RouteParams])
+        __metadata('design:paramtypes', [http_1.Http, router_1.Router, common_1.FormBuilder, router_1.RouteParams, router_1.RouteData])
     ], Customer);
     return Customer;
 })();

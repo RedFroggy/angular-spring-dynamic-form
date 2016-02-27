@@ -11,10 +11,8 @@ import {Customer} from './customer/customer';
 })
 @RouteConfig([
     new Route({path: '/customers', component: Customers, name: 'Customers',useAsDefault: true}),
-    new Route({path: '/customer/:id', component: Customer, name: 'Customer'})
-    /*new Route({path: '/user/:id', component: User, name: 'User'})*/
+    new Route({path: '/customer/create', component: Customer, name: 'CustomerCreate',data:{isEdition: false}}),
+    new Route({path: '/customer/:id', component: Customer, name: 'CustomerEdit',data:{isEdition: true}})
+
 ])
-export class AppComponent {
-    constructor(router:Router) {
-    }
-}
+export class AppComponent {}

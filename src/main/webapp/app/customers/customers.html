@@ -1,16 +1,32 @@
 <div class="container">
     <div class="row">
-        <table class="table table-hover">
-            <tr>
-                <th>#</th>
-                <th>First name</th>
-                <th>Last name</th>
-            </tr>
-            <tr *ngFor='#customer of customers'>
-                <td>{{customer.id}}</td>
-                <td><a href="" (click)="onSelectCustomer($event,customer.id)">{{customer.firstName}}</a></td>
-                <td>{{customer.lastName}}</td>
-            </tr>
-        </table>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer list</h3>
+                <span class="toolbar">
+                    <button type="button" class="btn btn-success" (click)="addCustomer()"><i class="fa fa-plus"></i> Add</button>
+                </span>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th>#</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Extra fields</th>
+                    </tr>
+                    <tr *ngFor='#customer of customers'>
+                        <td>{{customer.id}}</td>
+                        <td><a href="" (click)="onSelectCustomer($event,customer.id)">{{customer.firstName}}</a></td>
+                        <td>{{customer.lastName}}</td>
+                        <td>
+                            <div *ngFor='#extraField of customer.extraFields | values'>
+                                <strong>{{extraField.key}}</strong>: {{extraField.value}}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

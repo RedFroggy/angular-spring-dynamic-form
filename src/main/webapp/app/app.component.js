@@ -13,7 +13,7 @@ var header_1 = require('./header/header');
 var customers_1 = require('./customers/customers');
 var customer_1 = require('./customer/customer');
 var AppComponent = (function () {
-    function AppComponent(router) {
+    function AppComponent() {
     }
     AppComponent = __decorate([
         core_1.Component({
@@ -23,9 +23,10 @@ var AppComponent = (function () {
         }),
         router_1.RouteConfig([
             new router_1.Route({ path: '/customers', component: customers_1.Customers, name: 'Customers', useAsDefault: true }),
-            new router_1.Route({ path: '/customer/:id', component: customer_1.Customer, name: 'Customer' })
+            new router_1.Route({ path: '/customer/create', component: customer_1.Customer, name: 'CustomerCreate', data: { isEdition: false } }),
+            new router_1.Route({ path: '/customer/:id', component: customer_1.Customer, name: 'CustomerEdit', data: { isEdition: true } })
         ]), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 })();

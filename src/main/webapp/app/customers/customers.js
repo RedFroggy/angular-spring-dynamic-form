@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
 var http_1 = require('angular2/http');
+var values_pipe_1 = require('../pipes/values.pipe');
 var Customers = (function () {
     function Customers(http, router) {
         var _this = this;
@@ -21,11 +22,15 @@ var Customers = (function () {
     }
     Customers.prototype.onSelectCustomer = function (event, id) {
         event.preventDefault();
-        this.router.navigate(['Customer', { id: id }]);
+        this.router.navigate(['CustomerEdit', { id: id }]);
+    };
+    Customers.prototype.addCustomer = function () {
+        this.router.navigate(['CustomerCreate']);
     };
     Customers = __decorate([
         core_1.Component({
             selector: 'customers',
+            pipes: [values_pipe_1.ValuesPipe],
             templateUrl: './app/customers/customers.html'
         }), 
         __metadata('design:paramtypes', [http_1.Http, router_1.Router])

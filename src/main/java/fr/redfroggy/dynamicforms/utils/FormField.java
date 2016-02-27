@@ -52,6 +52,16 @@ public class FormField implements Serializable {
 
     private List<String> enumValues;
 
+    private Integer min;
+
+    private Integer max;
+
+    private Integer minLength;
+
+    private Integer maxLength;
+
+    private Boolean showAsColumn;
+
     public Integer getId() {
         return id;
     }
@@ -144,6 +154,47 @@ public class FormField implements Serializable {
         this.enumValues = enumValues;
     }
 
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public void setMax(Integer max) {
+        this.max = max;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public Integer getMinLength() {
+        return minLength;
+    }
+
+    public void setMinLength(Integer minLength) {
+        this.minLength = minLength;
+    }
+
+    public Boolean getShowAsColumn() {
+        return showAsColumn;
+    }
+
+    public void setShowAsColumn(Boolean showAsColumn) {
+        this.showAsColumn = showAsColumn;
+    }
+
     /**
      * Get field name
      * @return field name
@@ -191,21 +242,6 @@ public class FormField implements Serializable {
     public void setFieldLabel(FormFieldLabel fieldLabel) {
         this.formFieldLabel = fieldLabel;
     }
-
-    /**
-     * Set from field formFieldLabel
-     * @param fieldTitle field title
-     */
-    /*public void setLabel(String fieldTitle) {
-        String newFieldTitle = getEntityName()+"."+getName();
-        if(this.getExtrafield()){
-            newFieldTitle = formatExtraFieldLabel(newFieldTitle);
-        }
-        if (formFieldLabel == null) {
-            formFieldLabel = new FormFieldLabel();
-        }
-        formFieldLabel.setLabel(newFieldTitle);
-    }*/
 
     /**
      * Format extra field formFieldLabel (adding "extra-" prefix)

@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * Created by Michael DESIGAUD on 25/02/2016.
  */
 @Entity
-public class Customer {
+public class Customer extends FieldExtensible{
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

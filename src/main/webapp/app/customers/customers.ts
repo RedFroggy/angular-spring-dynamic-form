@@ -1,9 +1,11 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Http} from 'angular2/http';
+import {ValuesPipe} from '../pipes/values.pipe';
 
 @Component({
     selector: 'customers',
+    pipes:[ValuesPipe],
     templateUrl: './app/customers/customers.html'
 })
 export class Customers {
@@ -15,6 +17,9 @@ export class Customers {
     }
     onSelectCustomer(event:Event,id:number):void {
         event.preventDefault();
-        this.router.navigate(['Customer',{id:id}]);
+        this.router.navigate(['CustomerEdit',{id:id}]);
+    }
+    addCustomer():void {
+        this.router.navigate(['CustomerCreate']);
     }
 }

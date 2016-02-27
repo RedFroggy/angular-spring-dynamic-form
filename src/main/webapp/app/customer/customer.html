@@ -1,18 +1,24 @@
 <div class="container">
     <div class="row">
         <form class="form" [ngFormModel]="customerForm" (submit)="saveCustomer()">
-            <div class="form-group">
-                <label for="firstName">First name</label>
-                <input type="text" id="firstName" required [(ngModel)]="customer.firstName" ngControl="firstName" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last name</label>
-                <input type="text" id="lastName" required [(ngModel)]="customer.lastName" ngControl="lastName" class="form-control">
-            </div>
-            <extra-form [(entity)]="customer"></extra-form>
+            <fieldset>
+                <legend>General Information</legend>
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" id="firstName" required [(ngModel)]="customer.firstName" ngControl="firstName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" id="lastName" required [(ngModel)]="customer.lastName" ngControl="lastName" class="form-control">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Additional  Information (Extra fields)</legend>
+                <extra-form [(entity)]="customer"></extra-form>
+            </fieldset>
             <div>
-                <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid"><span class="fa fa-save"></span>Save</button>
-                <button type="button" class="btn btn-default" (click)="cancel()"><span class="fa fa-save"></span>Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid"><i class="fa fa-save"></i> Save</button>
+                <button type="button" class="btn btn-default" (click)="cancel()"><i class="fa fa-save"></i> Cancel</button>
             </div>
         </form>
     </div>
