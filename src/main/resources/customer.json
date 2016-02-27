@@ -81,6 +81,13 @@
       "label":"Readable field",
       "value":"Readable value",
       "writable":false
+    },
+    {
+      "id":9,
+      "type":"date",
+      "name":"birthDate",
+      "label":"Birth date",
+      "required":true
     }
   ]
 }

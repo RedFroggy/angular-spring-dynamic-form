@@ -22,9 +22,6 @@ export class Customers {
     addCustomer():void {
         this.router.navigate(['CustomerCreate']);
     }
-    showExtraField():boolean {
-        return true;
-    }
     isTypeImage(extraField:any):boolean {
         return extraField && extraField.value.indexOf('data:image') !== -1;
     }

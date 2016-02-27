@@ -7,6 +7,7 @@ import {TextAreaExtraField} from './fields/textarea-extra-field';
 import {FileInputExtraField} from './fields/file-input-extra-field';
 import {ExtraField} from './fields/extra-field';
 import {SelectExtraField} from './fields/select-extra-field';
+import {DateInputExtraField} from './fields/date-input-extra-field';
 
 @Component({
     selector: 'extra-form',
@@ -27,6 +28,9 @@ export class DynamicForm {
 
         Promise.all([this.entityPromise,formPromise]).then((values) => {
             let entity:{extraFields:any} = values[0];
+            if(!entity) {
+                entity = {extraFields:{}};
+            }
 
             this.form = new ExtraForm(values[1]);
 
@@ -46,6 +50,9 @@ export class DynamicForm {
                 }
                 if(field.isTypeSelect()) {
                     type = SelectExtraField;
+                }
+                if(field.isTypeDate()) {
+                    type = DateInputExtraField;
                 }
                 this.dcl.loadIntoLocation(type,this.elementRef,'extraField').then((componentRef:ComponentRef) => {
                     let instance:ExtraField = componentRef.instance;

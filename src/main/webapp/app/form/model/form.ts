@@ -10,6 +10,7 @@ const TYPE_TEXTAREA:string = 'textarea';
 const TYPE_FILE:string = 'file';
 const TYPE_PASSWORD:string = 'password';
 const TYPE_SELECT:string = 'select';
+const TYPE_DATE:string = 'date';
 
 export class ExtraFormField {
     id:number;
@@ -69,6 +70,9 @@ export class ExtraFormField {
     }
     isTypeSelect():boolean  {
         return this.isType(TYPE_SELECT);
+    }
+    isTypeDate():boolean {
+        return this.isType(TYPE_DATE);
     }
     getControl():Control {
         if(!this.control) {
