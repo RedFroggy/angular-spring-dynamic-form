@@ -12,6 +12,7 @@ var router_1 = require('angular2/router');
 var http_1 = require('angular2/http');
 var common_1 = require('angular2/common');
 var extra_form_1 = require('../form/extra-form');
+var control_messages_1 = require('../form/error/control-messages');
 var Customer = (function () {
     function Customer(http, router, form, routeParams, routeData) {
         this.http = http;
@@ -54,7 +55,7 @@ var Customer = (function () {
         core_1.Component({
             selector: 'customer',
             templateUrl: './app/customer/customer.html',
-            directives: [extra_form_1.DynamicForm]
+            directives: [extra_form_1.DynamicForm, control_messages_1.ControlMessages]
         }), 
         __metadata('design:paramtypes', [http_1.Http, router_1.Router, common_1.FormBuilder, router_1.RouteParams, router_1.RouteData])
     ], Customer);

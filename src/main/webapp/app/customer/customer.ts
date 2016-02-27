@@ -3,11 +3,12 @@ import {Router, RouteParams,RouteData} from 'angular2/router';
 import {Http,Headers,RequestOptionsArgs} from 'angular2/http';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {DynamicForm} from '../form/extra-form';
+import {ControlMessages} from '../form/error/control-messages';
 
 @Component({
     selector: 'customer',
     templateUrl: './app/customer/customer.html',
-    directives:[DynamicForm]
+    directives:[DynamicForm,ControlMessages]
 })
 export class Customer {
     customerForm:ControlGroup;

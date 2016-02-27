@@ -77,6 +77,9 @@ export class ExtraFormField {
         if(this.isTypeEmail()) {
             validators.push(ValidatorService.emailValidator);
         }
+        if(this.isTypeNumber()) {
+            validators.push(ValidatorService.numberValidator);
+        }
         console.log(validators.length+' validators added to control',this.name);
         this.validators = Validators.compose(validators);
     }

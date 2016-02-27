@@ -56,6 +56,9 @@ var ExtraFormField = (function () {
         if (this.isTypeEmail()) {
             validators.push(validator_service_1.ValidatorService.emailValidator);
         }
+        if (this.isTypeNumber()) {
+            validators.push(validator_service_1.ValidatorService.numberValidator);
+        }
         console.log(validators.length + ' validators added to control', this.name);
         this.validators = common_1.Validators.compose(validators);
     };

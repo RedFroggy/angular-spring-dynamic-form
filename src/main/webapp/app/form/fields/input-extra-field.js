@@ -19,6 +19,7 @@ var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
 var form_1 = require('../model/form');
 var extra_field_1 = require('./extra-field');
+var control_messages_1 = require('../error/control-messages');
 var InputExtraField = (function (_super) {
     __extends(InputExtraField, _super);
     function InputExtraField(formDir) {
@@ -35,7 +36,8 @@ var InputExtraField = (function (_super) {
     InputExtraField = __decorate([
         core_1.Component({
             selector: 'input-extra-field',
-            template: "\n        <div class=\"form-group\">\n            <label [attr.for]=\"field.name\">{{field.label}}</label>\n            <input [attr.title]=\"field.label\" [attr.minlength]=\"field.minLength\" [attr.min]=\"field.min\" [attr.max]=\"field.max\"\n            [attr.maxlength]=\"field.maxLength\" [attr.placeholder]=\"field.label\"\n            [attr.type]=\"field.type\" [ngFormControl]=\"fieldControl\"\n            [attr.id]=\"field.name\" [(ngModel)]=\"entity[field.name]\" class=\"form-control\">\n        </div>\n    "
+            directives: [control_messages_1.ControlMessages],
+            template: "\n        <div class=\"form-group\">\n            <label [attr.for]=\"field.name\">{{field.label}}</label>\n            <input [attr.title]=\"field.label\" [attr.minlength]=\"field.minLength\" [attr.min]=\"field.min\" [attr.max]=\"field.max\"\n            [attr.maxlength]=\"field.maxLength\" [attr.placeholder]=\"field.label\"\n            [attr.type]=\"field.type\" [ngFormControl]=\"fieldControl\"\n            [attr.id]=\"field.name\" [(ngModel)]=\"entity[field.name]\" class=\"form-control\">\n            <error-messages [control]=\"field.name\"></error-messages>\n        </div>\n    "
         }),
         __param(0, core_1.Inject(common_1.NgFormModel)), 
         __metadata('design:paramtypes', [common_1.NgFormModel])
