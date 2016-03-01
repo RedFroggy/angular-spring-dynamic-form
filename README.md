@@ -1,7 +1,7 @@
 Dynamic form creation with Angular 2 and Spring
 ===============================================
 
-Dynamic form creation using Angular 2 and Spring for a list of customers
+Dynamic form creation and validation using Angular 2 and Spring for a list of customers
 
 #Stack
 - Spring Boot
@@ -10,7 +10,7 @@ Dynamic form creation using Angular 2 and Spring for a list of customers
 - Angular 2.0.0-beta.7
 
 #Features
-- Extra fields description with using a JSON file (server-side)
+- Extra fields description with a JSON file (server-side)
 - Customer list
 - Customer creation / edition
 - Dynamic rendering of input: Tested for text,email,url,file,date inputs
