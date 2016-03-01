@@ -18,7 +18,8 @@ Dynamic form creation using Angular 2 and Spring for a list of customers
 - Each dynamic field is fully validated
 
 # Example of fields description with JSON file
-````{
+````
+{
   "entityName":"Customer",
   "version":1,
   "fields":[
@@ -114,6 +115,7 @@ Dynamic form creation using Angular 2 and Spring for a list of customers
 ````
 
 #Installation
+
 - Install tsd globally
 ````bash
 $ npm -g install tsd
