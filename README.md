@@ -1,4 +1,4 @@
-Dynamic form creation with Angular 2 and Spring
+Dynamic form creation with Angular 2 and Spring [![Build Status](https://travis-ci.org/RedFroggy/angular-spring-dynamic-form.svg?branch=master)](https://travis-ci.org/RedFroggy/angular-spring-dynamic-form)
 ===============================================
 
 Dynamic form creation and validation using Angular 2 and Spring for a list of customers
