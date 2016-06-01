@@ -15,10 +15,10 @@ import {DateInputExtraField} from './fields/date-input-extra-field';
 })
 export class DynamicForm {
     @Input('entity') entityPromise:Promise<{extraFields:any}>;
-    @ViewChild('extraField', {read: ViewContainerRef}) extraField:ViewContainerRef;
+    @ViewChild('extraField', {read: ViewContainerRef}) extraFieldRef:ViewContainerRef;
     form:ExtraForm;
     onlyExtraFields:boolean = true;
-    constructor(private http:Http,private dcl: DynamicComponentLoader, private elementRef: ElementRef) {
+    constructor(private http:Http,private dcl: DynamicComponentLoader) {
         this.form = new ExtraForm();
     }
     ngOnInit():void {
@@ -53,7 +53,7 @@ export class DynamicForm {
                     type = DateInputExtraField;
                 }
 
-                this.dcl.loadNextToLocation(type,this.extraField).then((componentRef:ComponentRef<any>) => {
+                this.dcl.loadNextToLocation(type,this.extraFieldRef).then((componentRef:ComponentRef<any>) => {
                     let instance:ExtraField = componentRef.instance;
                     instance.entity = entity;
                     instance.field = field;
