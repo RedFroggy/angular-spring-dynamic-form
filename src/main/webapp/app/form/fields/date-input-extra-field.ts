@@ -1,5 +1,5 @@
-import {Component,Inject,Input} from 'angular2/core';
-import {NgFormModel} from 'angular2/common';
+import {Component,Inject,Input} from '@angular/core';
+import {NgFormModel} from '@angular/common';
 import {ExtraFormField} from '../model/form';
 import {ExtraField} from './extra-field';
 import {ControlMessages} from '../error/control-messages';

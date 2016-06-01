@@ -1,4 +1,4 @@
-import {NgFormModel,Control} from 'angular2/common';
+import {NgFormModel,Control} from '@angular/common';
 import {ExtraFormField} from '../model/form';
 
 export abstract class ExtraField {
@@ -17,6 +17,7 @@ export abstract class ExtraField {
             }  else if(this.field.hasValue()) {
                 value = this.field.value;
                 this.entity.extraFields[this.field.name] = value;
+                console.log(this.entity);
             }
             if(!this.field.isTypeFile()) {
                 this.fieldControl.updateValue(value);

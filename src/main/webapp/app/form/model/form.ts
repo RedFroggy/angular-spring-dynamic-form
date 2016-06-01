@@ -1,4 +1,4 @@
-import {Validators,Control} from 'angular2/common';
+import {Validators,Control} from '@angular/common';
 import {ValidatorService} from '../validators/validator.service';
 
 ///<reference path="../../../../../../typings/lodash/lodash.d.ts" />

@@ -1,7 +1,7 @@
-import {Component,Inject} from 'angular2/core';
-import {Router, RouteParams,RouteData} from 'angular2/router';
-import {Http,Headers,RequestOptionsArgs} from 'angular2/http';
-import {FormBuilder, Validators, ControlGroup,NgFormModel} from 'angular2/common';
+import {Component,Inject} from '@angular/core';
+import {Router, RouteSegment} from '@angular/router';
+import {Http,Headers,RequestOptionsArgs} from '@angular/http';
+import {FormBuilder, Validators, ControlGroup,NgFormModel} from '@angular/common';
 import {DynamicForm} from '../form/extra-form';
 import {ControlMessages} from '../form/error/control-messages';
 
@@ -16,10 +16,10 @@ export class Customer {
     customerPromise:Promise;
     isEdition:boolean;
     nbErrors:number;
-    constructor(private http:Http,private router:Router,private form: FormBuilder,private routeParams:RouteParams,routeData: RouteData) {
+    constructor(private http:Http,private router:Router,private form: FormBuilder,private routeSegment:RouteSegment) {
         this.customer = {};
         this.nbErrors = 0;
-        this.isEdition = routeData.get('isEdition');
+        this.isEdition = !!routeSegment.getParam('id');
 
         this.customerForm = form.group({
             firstName: ['', Validators.required],
@@ -34,10 +34,13 @@ export class Customer {
 
         if(this.isEdition) {
             this.getCustomer();
+        } else {
+            this.customer.extraFields = {};
+            this.customerPromise = Promise.resolve(this.customer);
         }
     }
     getCustomer():void {
-        this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+this.routeParams.get('id'))
+        this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+this.routeSegment.getParam('id'))
             .map(res => res.json()).toPromise();
 
         this.customerPromise.then((customer:any) => {
@@ -59,6 +62,6 @@ export class Customer {
 
         this.http.request('http://localhost:8080/api/customers',reqOptions)
             .map(res => res.json())
-            .subscribe(() => this.router.navigate(['Customers']));
+            .subscribe(() => this.router.navigate(['/customers']));
     }
 }

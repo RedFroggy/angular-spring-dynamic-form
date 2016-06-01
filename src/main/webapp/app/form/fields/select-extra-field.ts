@@ -1,5 +1,5 @@
-import {Component,Inject,Input} from 'angular2/core';
-import {NgFormModel} from 'angular2/common';
+import {Component,Inject,Input} from '@angular/core';
+import {NgFormModel} from '@angular/common';
 import {ExtraFormField} from '../model/form';
 import {ExtraField} from './extra-field';
 import {ControlMessages} from '../error/control-messages';
@@ -12,7 +12,7 @@ import {ControlMessages} from '../error/control-messages';
             <label [attr.for]="field.name">{{field.label}}</label>
             <select [attr.title]="field.label" [attr.placeholder]="field.placeholder" [ngFormControl]="fieldControl"
             [attr.id]="field.name" [(ngModel)]="entity.extraFields[field.name]" class="form-control">
-                <option *ngFor="#option of field.options" value="{{option.value}}">{{option.value}}</option>
+                <option *ngFor="let option of field.options" value="{{option.value}}">{{option.value}}</option>
             </select>
             <error-messages [control]="field.name"></error-messages>
         </div>

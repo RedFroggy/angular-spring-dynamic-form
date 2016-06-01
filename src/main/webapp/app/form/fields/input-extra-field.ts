@@ -1,5 +1,5 @@
-import {Component,Inject,Input} from 'angular2/core';
-import {NgFormModel} from 'angular2/common';
+import {Component,Inject,Input} from '@angular/core';
+import {NgFormModel} from '@angular/common';
 import {ExtraFormField} from '../model/form';
 import {ExtraField} from './extra-field';
 import {ControlMessages} from '../error/control-messages';
@@ -21,7 +21,7 @@ import {ControlMessages} from '../error/control-messages';
 export class InputExtraField extends ExtraField {
     @Input() field:ExtraFormField;
     @Input() entity:{extraFields:Object};
-    constructor(@Inject(NgFormModel) formDir: NgFormModel) {
+    constructor(formDir: NgFormModel) {
         super(formDir);
     }
     get disabled():string {

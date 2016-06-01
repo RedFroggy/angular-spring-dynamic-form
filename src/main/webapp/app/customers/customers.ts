@@ -1,6 +1,6 @@
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {Http} from 'angular2/http';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {Http} from '@angular/http';
 import {ValuesPipe} from '../pipes/values.pipe';
 
 @Component({
@@ -11,16 +11,14 @@ import {ValuesPipe} from '../pipes/values.pipe';
 export class Customers {
     customers:Array<any>;
     constructor(private http:Http,private router: Router) {
-        http.get('http://localhost:8080/api/customers').map(res => res.json()).subscribe((customers:Array<any>) => {
-            this.customers = customers;
-        });
+        http.get('http://localhost:8080/api/customers').map(res => res.json()).subscribe((customers:Array<any>) =>  this.customers = customers);
     }
     onSelectCustomer(event:Event,id:number):void {
         event.preventDefault();
-        this.router.navigate(['CustomerEdit',{id:id}]);
+        this.router.navigate(['/customer',id]);
     }
     addCustomer():void {
-        this.router.navigate(['CustomerCreate']);
+        this.router.navigate(['/customer/create']);
     }
     isTypeImage(extraField:any):boolean {
         return extraField && extraField.value.indexOf('data:image') !== -1;

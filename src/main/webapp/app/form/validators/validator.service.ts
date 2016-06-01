@@ -1,4 +1,4 @@
-import {AbstractControl,Control} from 'angular2/common';
+import {AbstractControl,Control} from '@angular/common';
 
 ///<reference path="../../../../../../typings/lodash/lodash.d.ts" />
 

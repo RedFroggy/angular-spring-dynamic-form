@@ -1,11 +1,11 @@
 
-import {Input,Component,Inject} from 'angular2/core';
-import {NgFormModel,AbstractControl} from 'angular2/common';
+import {Input,Component,Inject} from '@angular/core';
+import {NgFormModel,AbstractControl} from '@angular/common';
 import {ValidatorService} from '../validators/validator.service';
 
 @Component({
     selector:'error-messages',
-    template: `<div [hidden]="!errors.length === 0"><span *ngFor="#error of errors"><span class="label label-danger">{{error}}</span>&nbsp;</span></div>`
+    template: `<div [hidden]="!errors.length === 0"><span *ngFor="let error of errors"><span class="label label-danger">{{error}}</span>&nbsp;</span></div>`
 })
 export class ControlMessages {
     @Input('control') controlName: string;

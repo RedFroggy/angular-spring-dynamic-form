@@ -15,12 +15,12 @@
                         <th>Last name</th>
                         <th>Extra fields</th>
                     </tr>
-                    <tr *ngFor='#customer of customers'>
+                    <tr *ngFor='let customer of customers'>
                         <td>{{customer.id}}</td>
                         <td><a href="" (click)="onSelectCustomer($event,customer.id)">{{customer.firstName}}</a></td>
                         <td>{{customer.lastName}}</td>
                         <td>
-                            <div *ngFor='#extraField of customer.extraFields | values'>
+                            <div *ngFor='let extraField of customer.extraFields | values'>
                                 <span *ngIf="!isTypeImage(extraField) && !isTypeApplication(extraField)">
                                    <strong>{{extraField.key}}</strong>: {{extraField.value}}
                                 </span>
