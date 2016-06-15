@@ -116,9 +116,9 @@ Dynamic form creation and validation using Angular 2 and Spring for a list of cu
 
 #Installation
 
-- Install tsd globally
+- Install typings globally
 ````bash
-$ npm -g install tsd
+$ npm -g install typings
 ````
 
 - Install typescript globally
@@ -130,6 +130,11 @@ $ npm -g install typescript
 - Install npm dependencies
 ````bash
 $ npm install
+````
+
+Compile typescript files
+````bash
+$ tsc
 ````
 
 #To run Java unit tests
