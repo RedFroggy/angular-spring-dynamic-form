@@ -1,5 +1,5 @@
 import {Component,Inject} from '@angular/core';
-import {Router, RouteSegment} from '@angular/router';
+import {Router} from '@angular/router';
 import {Http,Headers,RequestOptionsArgs} from '@angular/http';
 import {FormBuilder, Validators, ControlGroup,NgFormModel} from '@angular/common';
 import {DynamicForm} from '../form/extra-form';
@@ -16,10 +16,11 @@ export class Customer {
     customerPromise:Promise;
     isEdition:boolean;
     nbErrors:number;
-    constructor(private http:Http,private router:Router,private form: FormBuilder,private routeSegment:RouteSegment) {
+    private sub:any;
+    constructor(private http:Http,private router:Router,private form: FormBuilder) {
         this.customer = {};
         this.nbErrors = 0;
-        this.isEdition = !!routeSegment.getParam('id');
+
 
         this.customerForm = form.group({
             firstName: ['', Validators.required],
@@ -31,16 +32,27 @@ export class Customer {
                 this.nbErrors = Object.keys(this.customerForm.errors).length;
             }
         });
-
-        if(this.isEdition) {
-            this.getCustomer();
-        } else {
-            this.customer.extraFields = {};
-            this.customerPromise = Promise.resolve(this.customer);
-        }
     }
-    getCustomer():void {
-        this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+this.routeSegment.getParam('id'))
+    ngOnInit() {
+        this.sub = this.router
+            .routerState
+            .queryParams
+            .subscribe(params => {
+                this.isEdition = !!params['id'];
+
+                if(this.isEdition) {
+                    this.getCustomer(params['id']);
+                } else {
+                    this.customer.extraFields = {};
+                    this.customerPromise = Promise.resolve(this.customer);
+                }
+            });
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    getCustomer(id:string):void {
+        this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+id)
             .map(res => res.json()).toPromise();
 
         this.customerPromise.then((customer:any) => {
@@ -49,7 +61,7 @@ export class Customer {
         });
     }
     cancel():void {
-        this.router.navigate(['Customers']);
+        this.router.navigate(['/customers']);
     }
     saveCustomer():void {
         let headers = new Headers();

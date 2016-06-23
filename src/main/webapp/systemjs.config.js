@@ -1,6 +1,6 @@
 /**
- * Systemjs configuration file
- * Created by Michael DESIGAUD on 01/06/2016.
+ * System configuration for Angular 2 samples
+ * Adjust as necessary for your application needs.
  */
 (function(global) {
     // map tells the System loader where to look for things
@@ -22,13 +22,24 @@
         'platform-browser',
         'platform-browser-dynamic',
         'router',
-        'router-deprecated',
-        'upgrade'
+        'router-deprecated'
     ];
+    // Individual files (~300 requests):
+    function packIndex(pkgName) {
+        packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    }
+    // Bundled (~40 requests):
+    function packUmd(pkgName) {
+        if (pkgName === 'router') {
+            packages['@angular/' + pkgName] = {main: 'index.js', defaultExtension: 'js'};
+        } else {
+            packages['@angular/' + pkgName] = {main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js'};
+        }
+    }
+    // Most environments should use UMD; some (Karma) need the individual index files
+    var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
     // Add package entries for angular packages
-    ngPackageNames.forEach(function(pkgName) {
-        packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
-    });
+    ngPackageNames.forEach(setPackageConfig);
     var config = {
         map: map,
         packages: packages
