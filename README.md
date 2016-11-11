@@ -114,29 +114,6 @@ Dynamic form creation and validation using Angular 2 and Spring for a list of cu
 }
 ````
 
-#Installation
-
-- Install typings globally
-````bash
-$ npm -g install typings
-````
-
-- Install typescript globally
-````bash
-$ npm -g install typescript
-````
-
-- Go to src/main/webapp folder
-- Install npm dependencies
-````bash
-$ npm install
-````
-
-Compile typescript files
-````bash
-$ tsc
-````
-
 #To run Java unit tests
 ````bash
 $ mvn test
@@ -146,4 +123,5 @@ $ mvn test
 ````bash
 $ mvn spring-boot:run
 ````
+Npm modules should be automatically installed and typescript files compiled (see pom.xml file)
 Then go to http://localhost:8080
