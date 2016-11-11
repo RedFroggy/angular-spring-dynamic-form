@@ -1,43 +1,38 @@
-import {Component,Inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Http,Headers,RequestOptionsArgs} from '@angular/http';
-import {FormBuilder, Validators, ControlGroup,NgFormModel} from '@angular/common';
-import {DynamicForm} from '../form/extra-form';
-import {ControlMessages} from '../form/error/control-messages';
+import {FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
+
 
 @Component({
     selector: 'customer',
-    templateUrl: './app/customer/customer.html',
-    directives:[DynamicForm,ControlMessages]
+    templateUrl: './app/customer/customer.html'
 })
 export class Customer {
-    customerForm:ControlGroup;
+    customerGroup:FormGroup;
     customer:any;
-    customerPromise:Promise;
+    customerPromise:Promise<any>;
     isEdition:boolean;
     nbErrors:number;
     private sub:any;
-    constructor(private http:Http,private router:Router,private form: FormBuilder) {
+    constructor(private route:ActivatedRoute, private http:Http, private router:Router, private form: FormBuilder) {
         this.customer = {};
         this.nbErrors = 0;
 
-
-        this.customerForm = form.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required]
+        this.customerGroup = form.group({
+            firstName: new FormControl('', [Validators.required]),
+            lastName: new FormControl('', [Validators.required])
         });
 
-        this.customerForm.valueChanges.subscribe(() => {
-            if(this.customerForm.errors) {
-                this.nbErrors = Object.keys(this.customerForm.errors).length;
+        this.customerGroup.valueChanges.subscribe(() => {
+            if(this.customerGroup.errors) {
+                this.nbErrors = Object.keys(this.customerGroup.errors).length;
             }
         });
     }
     ngOnInit() {
-        this.sub = this.router
-            .routerState
-            .queryParams
-            .subscribe(params => {
+        this.route.params
+            .forEach(params => {
                 this.isEdition = !!params['id'];
 
                 if(this.isEdition) {
@@ -47,9 +42,6 @@ export class Customer {
                     this.customerPromise = Promise.resolve(this.customer);
                 }
             });
-    }
-    ngOnDestroy() {
-        this.sub.unsubscribe();
     }
     getCustomer(id:string):void {
         this.customerPromise = this.http.get('http://localhost:8080/api/customers/'+id)

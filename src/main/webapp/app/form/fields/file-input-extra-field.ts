@@ -1,12 +1,10 @@
 import {Component,Inject,Input} from '@angular/core';
-import {NgFormModel} from '@angular/common';
+import {NgForm} from '@angular/forms';
 import {ExtraFormField} from '../model/form';
 import {ExtraField} from './extra-field';
-import {ControlMessages} from '../error/control-messages';
 
 @Component({
     selector: 'file-input-extra-field',
-    directives:[ControlMessages],
     template:`
         <div class="form-group">
             <label [attr.for]="field.name">{{field.label}}</label>
@@ -21,7 +19,7 @@ import {ControlMessages} from '../error/control-messages';
 export class FileInputExtraField extends ExtraField {
     @Input() field:ExtraFormField;
     @Input() entity:{extraFields:Object};
-    constructor(@Inject(NgFormModel) formDir: NgFormModel) {
+    constructor(@Inject(NgForm) formDir: NgForm) {
         super(formDir);
     }
     onChange(event:{preventDefault:Function,target:{files:Array<File>}}) {

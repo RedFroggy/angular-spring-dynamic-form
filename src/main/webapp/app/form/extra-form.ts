@@ -1,13 +1,12 @@
-import {Component,Input,DynamicComponentLoader,ElementRef,ComponentRef,Type,ViewChild,ViewContainerRef} from '@angular/core';
-import {FormBuilder, Validators, ControlGroup,Form} from '@angular/common';
+import {Component,Input,ComponentFactoryResolver,ComponentRef,Type,ViewChild,ViewContainerRef} from '@angular/core';
 import {Http} from '@angular/http';
 import {InputExtraField} from './fields/input-extra-field';
 import {ExtraForm,ExtraFormField} from './model/form';
 import {TextAreaExtraField} from './fields/textarea-extra-field';
 import {FileInputExtraField} from './fields/file-input-extra-field';
-import {ExtraField} from './fields/extra-field';
 import {SelectExtraField} from './fields/select-extra-field';
 import {DateInputExtraField} from './fields/date-input-extra-field';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'extra-form',
@@ -15,10 +14,11 @@ import {DateInputExtraField} from './fields/date-input-extra-field';
 })
 export class DynamicForm {
     @Input('entity') entityPromise:Promise<{extraFields:any}>;
+    @Input('formGroup') formGroup:FormGroup;
     @ViewChild('extraField', {read: ViewContainerRef}) extraFieldRef:ViewContainerRef;
     form:ExtraForm;
     onlyExtraFields:boolean = true;
-    constructor(private http:Http,private dcl: DynamicComponentLoader) {
+    constructor(private http:Http,private componentFactoryResolver: ComponentFactoryResolver) {
         this.form = new ExtraForm();
     }
     ngOnInit():void {
@@ -36,7 +36,7 @@ export class DynamicForm {
                 entity.extraFields = {};
             }
             this.form.fields.forEach((field:ExtraFormField) => {
-                let type:Type;
+                let type:Type<any>;
                 if(field.isInput()) {
                     type = InputExtraField;
                 }
@@ -53,11 +53,11 @@ export class DynamicForm {
                     type = DateInputExtraField;
                 }
 
-                this.dcl.loadNextToLocation(type,this.extraFieldRef).then((componentRef:ComponentRef<any>) => {
-                    let instance:ExtraField = componentRef.instance;
-                    instance.entity = entity;
-                    instance.field = field;
-                });
+                let factory = this.componentFactoryResolver.resolveComponentFactory(type);
+                let componentRef:ComponentRef<any> = this.extraFieldRef.createComponent(factory);
+                componentRef.instance.entity = entity;
+                componentRef.instance.field = field;
+                componentRef.instance.formGroup = this.formGroup;
             });
         });
     }

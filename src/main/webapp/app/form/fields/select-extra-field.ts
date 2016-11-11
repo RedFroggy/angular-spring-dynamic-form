@@ -1,16 +1,14 @@
 import {Component,Inject,Input} from '@angular/core';
-import {NgFormModel} from '@angular/common';
+import {NgForm, FormGroup} from '@angular/forms';
 import {ExtraFormField} from '../model/form';
 import {ExtraField} from './extra-field';
-import {ControlMessages} from '../error/control-messages';
 
 @Component({
     selector: 'select-extra-field',
-    directives:[ControlMessages],
     template:`
-        <div class="form-group">
+        <div [formGroup]="formGroup" class="form-group">
             <label [attr.for]="field.name">{{field.label}}</label>
-            <select [attr.title]="field.label" [attr.placeholder]="field.placeholder" [ngFormControl]="fieldControl"
+            <select [attr.title]="field.label" [attr.placeholder]="field.placeholder" [formControl]="fieldControl"
             [attr.id]="field.name" [(ngModel)]="entity.extraFields[field.name]" class="form-control">
                 <option *ngFor="let option of field.options" value="{{option.value}}">{{option.value}}</option>
             </select>
@@ -21,7 +19,8 @@ import {ControlMessages} from '../error/control-messages';
 export class SelectExtraField extends ExtraField {
     @Input() field:ExtraFormField;
     @Input() entity:{extraFields:Object};
-    constructor(@Inject(NgFormModel) formDir: NgFormModel) {
+    @Input() formGroup:FormGroup;
+    constructor(@Inject(NgForm) formDir: NgForm) {
         super(formDir);
     }
 }

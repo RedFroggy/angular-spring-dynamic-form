@@ -1,14 +1,19 @@
-import {ROUTER_DIRECTIVES, RouterConfig, Router,provideRouter} from '@angular/router';
-import {Customers} from './customers/customers';
-import {Customer} from './customer/customer';
+/**
+ * Application routes
+ * Created by Michael DESIGAUD on 11/11/2016.
+ */
 
-export const routes: RouterConfig = [
+import {Routes, RouterModule} from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+
+import {Customer} from './customer/customer';
+import {Customers} from './customers/customers';
+
+const routes: Routes = [
     {path: 'customers', component: Customers},
     {path: 'customer/create', component: Customer},
     {path: 'customer/:id', component: Customer},
-    {path: '', component: Customers}
+    {path: '', component: Customers},
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-    provideRouter(routes)
-];
+export const RoutesModule: ModuleWithProviders = RouterModule.forRoot(routes);

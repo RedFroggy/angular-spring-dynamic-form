@@ -1,26 +1,28 @@
 <div class="container">
     <div class="row">
-        <form class="form" [ngFormModel]="customerForm" (submit)="saveCustomer()">
-            <fieldset>
-                <legend>General Information</legend>
-                <div class="form-group">
-                    <label for="firstName">First name</label>
-                    <input type="text" id="firstName" required [(ngModel)]="customer.firstName" ngControl="firstName" class="form-control">
-                    <error-messages control="firstName"></error-messages>
+        <form class="form" #customerForm="ngForm" (submit)="saveCustomer()">
+            <div [formGroup]="customerGroup">
+                <fieldset>
+                    <legend>General Information</legend>
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" name="firstName" [(ngModel)]="customer.firstName" required formControlName="firstName" class="form-control">
+                        <error-messages control="firstName"></error-messages>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" name="lastName" [(ngModel)]="customer.lastName" required formControlName="lastName" class="form-control">
+                        <error-messages control="lastName"></error-messages>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Additional  Information (Extra fields)</legend>
+                    <extra-form [(formGroup)]="customerGroup" [(entity)]="customerPromise"></extra-form>
+                </fieldset>
+                <div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid"><i class="fa fa-save"></i> Save</button>
+                    <button type="button" class="btn btn-default" (click)="cancel()"><i class="fa fa-save"></i> Cancel</button>
                 </div>
-                <div class="form-group">
-                    <label for="lastName">Last name</label>
-                    <input type="text" id="lastName" required [(ngModel)]="customer.lastName" ngControl="lastName" class="form-control">
-                    <error-messages control="lastName"></error-messages>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Additional  Information (Extra fields)</legend>
-                <extra-form [(entity)]="customerPromise"></extra-form>
-            </fieldset>
-            <div>
-                <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid"><i class="fa fa-save"></i> Save</button>
-                <button type="button" class="btn btn-default" (click)="cancel()"><i class="fa fa-save"></i> Cancel</button>
             </div>
         </form>
     </div>

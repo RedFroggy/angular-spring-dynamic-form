@@ -1,1 +1,1 @@
-System.import('app/main').then(null, console.error.bind(console));
+System.import('app').catch(function(err){ console.error(err); });

@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Http} from '@angular/http';
-import {ValuesPipe} from '../pipes/values.pipe';
 
 @Component({
     selector: 'customers',
-    pipes:[ValuesPipe],
     templateUrl: './app/customers/customers.html'
 })
 export class Customers {

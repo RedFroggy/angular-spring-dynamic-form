@@ -1,6 +1,6 @@
 
 import {Input,Component,Inject} from '@angular/core';
-import {NgFormModel,AbstractControl} from '@angular/common';
+import {NgForm,AbstractControl} from '@angular/forms';
 import {ValidatorService} from '../validators/validator.service';
 
 @Component({
@@ -9,9 +9,9 @@ import {ValidatorService} from '../validators/validator.service';
 })
 export class ControlMessages {
     @Input('control') controlName: string;
-    constructor(@Inject(NgFormModel) private formDir: NgFormModel) {}
+    constructor(@Inject(NgForm) private formDir: NgForm) {}
     get errors() {
-        let c:AbstractControl = this.formDir.form.find(this.controlName);
+        let c:AbstractControl = this.formDir.form.get(this.controlName);
         if(c) {
             for (let propertyName in c.errors) {
                 if (c.errors.hasOwnProperty(propertyName)) {

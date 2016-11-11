@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
+    "moduleResolution": "node",
     "noEmitOnError": false,
     "rootDir": ".",
     "emitDecoratorMetadata": true,
@@ -14,5 +15,5 @@
   "exclude": [
     "src/main/webapp/node_modules"
   ],
-  "compileOnSave": false
+  "compileOnSave": true
 }

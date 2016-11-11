@@ -1,4 +1,4 @@
-import {AbstractControl,Control} from '@angular/common';
+import {AbstractControl,FormControl} from '@angular/forms';
 
 ///<reference path="../../../../../../typings/lodash/lodash.d.ts" />
 
@@ -28,14 +28,14 @@ export class ValidatorService {
         return errors;
     }
 
-    static emailValidator(control:Control):Object {
+    static emailValidator(control:FormControl):Object {
         if (control.value && control.value.match(EMAIL_REGEX)) {
             return null;
         }
         return { 'invalidEmailAddress': true };
     }
 
-    static numberValidator(control:Control):Object {
+    static numberValidator(control:FormControl):Object {
         if(control.value && !isNaN(control.value)) {
             return null;
         }
@@ -43,7 +43,7 @@ export class ValidatorService {
     }
 
     static regexValidator(pattern: string): Function {
-        return (control: Control): {[key: string]: any} => {
+        return (control: FormControl): {[key: string]: any} => {
             return control.value && control.value.match(pattern) ? null : {pattern: {regex:pattern}};
         };
     }

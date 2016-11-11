@@ -1,4 +1,4 @@
-import {Validators,Control} from '@angular/common';
+import {Validators, FormControl, ValidatorFn} from '@angular/forms';
 import {ValidatorService} from '../validators/validator.service';
 
 ///<reference path="../../../../../../typings/lodash/lodash.d.ts" />
@@ -32,8 +32,8 @@ export class ExtraFormField {
     showAsColumn:boolean;
     fileAccept:string;
     options:Array<{id:number,value:string}>;
-    private validators:Function;
-    private control:Control;
+    private validators:ValidatorFn;
+    private control:FormControl;
     constructor(_field?:any) {
         _.assignIn(this,_field);
         this.initValidators();
@@ -74,15 +74,15 @@ export class ExtraFormField {
     isTypeDate():boolean {
         return this.isType(TYPE_DATE);
     }
-    getControl():Control {
+    getControl():FormControl {
         if(!this.control) {
-            this.control = new Control(this.name,this.validators);
+            this.control = new FormControl(this.name,this.validators);
         }
         return this.control;
     }
     private initValidators():void {
         console.log('Adding validators to control ',this.name);
-        let validators:Array<Function> = [];
+        let validators:Array<any> = [];
         if(this.required) {
             validators.push(Validators.required);
         }
@@ -104,7 +104,9 @@ export class ExtraFormField {
             validators.push(ValidatorService.regexValidator(this.pattern));
         }
         console.log(validators.length+' validators added to control',this.name);
-        this.validators = Validators.compose(validators);
+        if(validators.length > 0) {
+            this.validators = Validators.compose(validators);
+        }
     }
 }
 
