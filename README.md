@@ -123,5 +123,5 @@ $ mvn test
 ````bash
 $ mvn spring-boot:run
 ````
-Npm modules should be automatically installed and typescript files compiled (see pom.xml file)
-Then go to http://localhost:8080
+- Npm modules should be automatically installed and typescript files compiled (see pom.xml file)
+- Then go to http://localhost:8080
