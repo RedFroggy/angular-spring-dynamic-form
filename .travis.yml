@@ -1,1 +1,2 @@
 language: java
+node_js: "0.10"
