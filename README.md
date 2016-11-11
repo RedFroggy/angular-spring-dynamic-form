@@ -7,7 +7,7 @@ Dynamic form creation and validation using Angular 2 and Spring for a list of cu
 - Spring Boot
 - Spring MVC
 - H2 in-memory database
-- Angular 2.0.0 RC1
+- Angular 2.0.0 RC3
 
 #Features
 - Extra fields description with a JSON file (server-side)
