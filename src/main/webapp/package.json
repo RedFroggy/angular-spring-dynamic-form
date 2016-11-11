@@ -5,26 +5,33 @@
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.35.0"
   },
+  "bin":{
+    "ntsc":"node_modules/ntypescript/bin/ntypescript.js"
+  },
+  "scripts": {
+    "build": "ntsc -p ../../../"
+  },
   "dependencies": {
     "@angular/common": "2.1.1",
     "@angular/compiler": "2.1.1",
     "@angular/core": "2.1.1",
-    "@angular/forms": "^2.1.1",
+    "@angular/forms": "2.1.1",
     "@angular/http": "2.1.1",
     "@angular/platform-browser": "2.1.1",
     "@angular/platform-browser-dynamic": "2.1.1",
     "@angular/platform-server": "2.1.1",
     "@angular/router": "3.1.1",
-    "@angular/upgrade": "~2.1.1",
-    "core-js": "^2.4.1",
-    "reflect-metadata": "^0.1.8",
+    "@angular/upgrade": "2.1.1",
     "bootstrap": "3.3.6",
+    "core-js": "2.4.1",
+    "font-awesome": "4.6.1",
     "jquery": "1.11.3",
     "lodash": "^4.3.0",
+    "ntypescript": "1.201609302242.1",
+    "reflect-metadata": "0.1.8",
     "rxjs": "5.0.0-rc.2",
     "systemjs": "0.19.9",
     "underscore": "1.8.3",
-    "zone.js": "~0.6.17",
-    "font-awesome":"4.6.1"
+    "zone.js": "0.6.17"
   }
 }
