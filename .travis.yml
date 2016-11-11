@@ -1,2 +1,2 @@
 language: java
-node_js: "0.10"
+script: mvn clean test -P travis
