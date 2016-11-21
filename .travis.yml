@@ -1,2 +1,6 @@
 language: java
-script: mvn clean test -P travis
+install: true
+services:
+  - docker
+script:
+  - mvn clean test -P travis
