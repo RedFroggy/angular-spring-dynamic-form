@@ -6,6 +6,7 @@ import { NgModule }      from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 
@@ -15,7 +16,7 @@ import {RoutesModule} from './app.routes';
 import {HeaderModule} from './header/header.module';
 
 @NgModule({
-    imports:        [ HttpModule, RouterModule, CustomerModule, CustomersModule, RoutesModule, HeaderModule ],
+    imports:        [ HttpModule, RouterModule, BrowserModule, CustomerModule, CustomersModule, RoutesModule, HeaderModule ],
     declarations:   [ AppComponent ],
     bootstrap:      [ AppComponent ],
     providers:      [ {provide: LocationStrategy, useClass: HashLocationStrategy} ]
