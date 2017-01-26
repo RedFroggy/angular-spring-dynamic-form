@@ -29,7 +29,7 @@
     "ntsc":"node_modules/ntypescript/bin/ntypescript.js"
   },
   "scripts": {
-    "build": "ntsc -p ../../../"
+    "build": "ntsc -p ../../../../"
   },
   "dependencies": {
     "@angular/common": "2.4.1",

@@ -1,7 +1,7 @@
-src/main/webapp/node_modules/
+src/main/resources/static/node_modules
 target/
 .idea/
 *.iml
-/src/main/webapp/app/**/*.js
-src/main/webapp/**/*.js.map
+src/main/resources/static/app/**/*.js
+src/main/resources/static/app/**/*.js.map
 
