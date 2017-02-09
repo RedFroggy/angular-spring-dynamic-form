@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/70a442e7b3eb421998f522a4a9dcd4fb)](https://www.codacy.com/app/michaeldesigaud/angular-spring-dynamic-form?utm_source=github.com&utm_medium=referral&utm_content=RedFroggy/angular-spring-dynamic-form&utm_campaign=badger)
 Dynamic form creation with Angular 2 and Spring [![Build Status](https://travis-ci.org/RedFroggy/angular-spring-dynamic-form.svg?branch=master)](https://travis-ci.org/RedFroggy/angular-spring-dynamic-form)
 ===============================================
 
